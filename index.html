@@ -11,16 +11,7 @@
     <style>
       html { font-family: 'Inter', sans-serif; }
     </style>
-    <!-- Add this script in the head for play overlay logic -->
-    <script>
-      function playVideo(id) {
-        const overlay = document.getElementById(id + '-overlay');
-        const video = document.getElementById(id + '-video');
-        overlay.style.display = 'none';
-        video.style.display = 'block';
-        video.play();
-      }
-    </script>
+
   </head>
   <body class="bg-gray-900 text-gray-200">
     <!-- Header -->
@@ -51,9 +42,9 @@
         <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-center">What We Build</h2>
         <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Toolbox is a suite of desktop toolbars built for MSPs. One lives on your help desk, the other with your clients. Both are designed to make support faster, clearer, and less interruptive.</p>
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Frontline Card -->
+          <!-- Support Panel Card -->
           <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-2">Frontline</h3>
+            <h3 class="text-xl font-semibold text-white mb-2">Support Panel</h3>
             <p class="text-gray-400 mb-4">A simple, client-facing toolbar in the taskbar for easy support requests and updates.</p>
             <ul class="text-gray-300 space-y-2">
               <li>Log new tickets with one click</li>
@@ -62,26 +53,15 @@
               <li>Launch onboarding/offboarding tools</li>
               <li>Fully branded per client</li>
             </ul>
-            <div class="mt-6 flex-1 flex items-center justify-center">
-              <div class="w-full max-w-xs aspect-[9/16] relative">
-                <!-- Overlay with preview and play button -->
-                <div id="frontline-overlay" class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg cursor-pointer z-10" onclick="playVideo('frontline')">
-                  <img src="frontline-preview.png" alt="Frontline Preview" class="w-full h-full object-cover rounded-t-lg" />
-                  <span class="absolute inset-0 flex items-center justify-center">
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="32" cy="32" r="32" fill="white" fill-opacity="0.7"/>
-                      <polygon points="26,20 48,32 26,44" fill="white"/>
-                    </svg>
-                  </span>
-                </div>
-                <!-- Video (hidden until play) -->
-                <video id="frontline-video" src="support-video.mp4" poster="frontline-preview.png" class="shadow w-full h-full object-cover bg-gray-700 rounded-t-lg" style="display:none" preload="none"></video>
+            <div class="mt-6 flex-1 flex items-end justify-center">
+              <div class="w-full max-w-sm">
+                <video src="support-panel.mp4" class="shadow w-full rounded-t-lg" autoplay muted loop playsinline></video>
               </div>
             </div>
           </div>
-          <!-- Resolve Card -->
+          <!-- Support Guru Card -->
           <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-2">Resolve</h3>
+            <h3 class="text-xl font-semibold text-white mb-2">Support Guru</h3>
             <p class="text-gray-400 mb-4">A system tray app for engineers—diagnose, escalate, and resolve tickets faster with all context in one place.</p>
             <ul class="text-gray-300 space-y-2">
               <li>Describe issues and run quick diagnostics</li>
@@ -90,20 +70,9 @@
               <li>Escalate or notify team leads in one click</li>
               <li>Flag recurring problems</li>
             </ul>
-            <div class="mt-6 flex-1 flex items-center justify-center">
-              <div class="w-full max-w-xs aspect-[9/16] relative">
-                <!-- Overlay with preview and play button -->
-                <div id="resolve-overlay" class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg cursor-pointer z-10" onclick="playVideo('resolve')">
-                  <img src="resolve-preview.jpg" alt="Resolve Preview" class="w-full h-full object-cover rounded-t-lg" />
-                  <span class="absolute inset-0 flex items-center justify-center">
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="32" cy="32" r="32" fill="white" fill-opacity="0.7"/>
-                      <polygon points="26,20 48,32 26,44" fill="white"/>
-                    </svg>
-                  </span>
-                </div>
-                <!-- Video (hidden until play) -->
-                <video id="resolve-video" src="resolver-vid.mp4" poster="resolve-preview.jpg" class="shadow w-full h-full object-cover bg-gray-700 rounded-t-lg" style="display:none" preload="none"></video>
+            <div class="mt-6 flex-1 flex items-end justify-center">
+              <div class="w-full max-w-sm">
+                <video src="support-guru.mp4" class="shadow w-full rounded-t-lg" autoplay muted loop playsinline></video>
               </div>
             </div>
           </div>
@@ -116,9 +85,9 @@
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 text-center">How Toolbox Drives Impact for Your MSP</h2>
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Frontline Value Card -->
+          <!-- Support Panel Value Card -->
           <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2"><span class="text-2xl">🗨️</span> Frontline</h3>
+            <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2"><span class="text-2xl">🗨️</span> Support Panel</h3>
             <p class="text-gray-400 mb-4">Empower End Users. Reduce Service Desk Noise.</p>
             <ul class="text-gray-300 space-y-2">
               <li><span class="mr-2">📝</span>Simpler Ticket Logging: End users log tickets, check statuses, or escalate—right from the taskbar.</li>
@@ -126,9 +95,9 @@
               <li><span class="mr-2">🌟</span>Better Client Experience: Faster feedback, fewer frustrations, improved CSAT.</li>
             </ul>
           </div>
-          <!-- Resolve Value Card -->
+          <!-- Support Guru Value Card -->
           <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2"><span class="text-2xl">🛠️</span> Resolve</h3>
+            <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2"><span class="text-2xl">🛠️</span> Support Guru</h3>
             <p class="text-gray-400 mb-4">Help Engineers Solve Tickets Faster.</p>
             <ul class="text-gray-300 space-y-2">
               <li><span class="mr-2">⚡</span>Faster Resolutions: Techs get quick access to context, next steps, and KBs without switching apps.</li>
