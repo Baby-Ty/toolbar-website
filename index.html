@@ -10,6 +10,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
       html { font-family: 'Inter', sans-serif; }
+      
+      .video-container {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+      
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+      
+      .play-button:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      
+      .play-button svg {
+        width: 20px;
+        height: 20px;
+        fill: #1f2937;
+        margin-left: 2px;
+      }
+      
+      .video-container video {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
     </style>
 
   </head>
@@ -45,34 +85,56 @@
           <!-- Support Panel Card -->
           <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
             <h3 class="text-xl font-semibold text-white mb-2">Support Panel</h3>
-            <p class="text-gray-400 mb-4">A simple, client-facing toolbar in the taskbar for easy support requests and updates.</p>
-            <ul class="text-gray-300 space-y-2">
-              <li>Log new tickets with one click</li>
-              <li>Check ticket status and request updates</li>
-              <li>Rate recent service directly in the toolbar</li>
-              <li>Launch onboarding/offboarding tools</li>
-              <li>Fully branded per client</li>
+            <p class="text-gray-400 mb-4">A modern, user-friendly support toolbar designed for seamless access to IT help and resources—right from your desktop.</p>
+            <p class="text-gray-300 mb-4">The Support Panel streamlines support requests, status tracking, and essential tools, all in one place.</p>
+            <div class="text-sm text-gray-400 font-semibold mb-3">Key Features</div>
+            <ul class="text-gray-300 space-y-4 text-sm">
+              <li><span class="font-medium">📝 Instant Ticket Submission:</span> Log new support tickets with a single click, including attachments and system info for faster resolution.</li>
+              <li><span class="font-medium">📊 Real-Time Ticket Tracking:</span> View the status of your open and past tickets, request updates, and receive notifications as your issues progress.</li>
+              <li><span class="font-medium">⭐ Service Feedback:</span> Quickly rate your recent support experience and leave comments to help us improve.</li>
+              <li><span class="font-medium">🔄 Onboarding & Offboarding Tools:</span> Launch automated workflows for new starters and leavers, including account creation, updates, and removals.</li>
+              <li><span class="font-medium">📖 User Guides & Resources:</span> Access step-by-step guides for common IT tasks, such as password resets, WiFi setup, and printer troubleshooting.</li>
+              <li><span class="font-medium">💻 Hardware Requests:</span> Request new equipment or report damaged devices directly from the panel.</li>
+              <li><span class="font-medium">📞 Callback & Escalation:</span> Request a call back from support or escalate urgent issues to senior technicians.</li>
             </ul>
             <div class="mt-6 flex-1 flex items-end justify-center">
               <div class="w-full max-w-sm">
-                <video src="support-panel.mp4" class="shadow w-full rounded-t-lg" autoplay muted loop playsinline></video>
+                <div class="video-container shadow rounded-t-lg">
+                  <video src="Support-panel.mp4" class="w-full" preload="metadata"></video>
+                  <div class="play-button">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <!-- Support Guru Card -->
           <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
             <h3 class="text-xl font-semibold text-white mb-2">Support Guru</h3>
-            <p class="text-gray-400 mb-4">A system tray app for engineers—diagnose, escalate, and resolve tickets faster with all context in one place.</p>
-            <ul class="text-gray-300 space-y-2">
-              <li>Describe issues and run quick diagnostics</li>
-              <li>Instant KB/documentation search</li>
-              <li>View ticket context clearly</li>
-              <li>Escalate or notify team leads in one click</li>
-              <li>Flag recurring problems</li>
+            <p class="text-gray-400 mb-4">Your all-in-one system tray assistant for IT engineers.</p>
+            <p class="text-gray-300 mb-4">Support Guru streamlines ticket resolution, diagnostics, and escalation—putting every tool and insight you need right at your fingertips.</p>
+            <div class="text-sm text-gray-400 font-semibold mb-3">Key Features</div>
+            <ul class="text-gray-300 space-y-4 text-sm">
+              <li><span class="font-medium">🔍 Instant Issue Diagnostics:</span> Quickly describe problems and receive step-by-step troubleshooting guidance powered by best practices.</li>
+              <li><span class="font-medium">📚 Smart Knowledge Base Search:</span> Search internal documentation and common solutions without leaving your workflow.</li>
+              <li><span class="font-medium">📋 Ticket Context at a Glance:</span> View, update, and summarize ticket details for faster, more informed responses.</li>
+              <li><span class="font-medium">🚨 One-Click Escalation & Notifications:</span> Instantly escalate issues or notify team leads with a single click.</li>
+              <li><span class="font-medium">🔄 Recurring Problem Detection:</span> Flag and track repeat issues to help your team spot trends and prevent future incidents.</li>
+              <li><span class="font-medium">⚡ Integrated Command Lookup:</span> Access common IT commands and scripts for Exchange, Active Directory, networking, and more.</li>
+              <li><span class="font-medium">🚀 Quick Access to Company Apps:</span> Launch essential tools like ConnectWise, ITGlue, RMM, and O365 directly from the tray.</li>
             </ul>
             <div class="mt-6 flex-1 flex items-end justify-center">
               <div class="w-full max-w-sm">
-                <video src="support-guru.mp4" class="shadow w-full rounded-t-lg" autoplay muted loop playsinline></video>
+                <div class="video-container shadow rounded-t-lg">
+                  <video src="support-guru.mp4" class="w-full" preload="metadata"></video>
+                  <div class="play-button">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -147,5 +209,59 @@
         <a href="#" class="hover:text-white">Terms of Service</a>
       </div>
     </footer>
+
+    <script>
+      // Video player functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const videoContainers = document.querySelectorAll('.video-container');
+        
+        videoContainers.forEach(container => {
+          const video = container.querySelector('video');
+          const playButton = container.querySelector('.play-button');
+          
+          // Set video to show a frame a couple seconds in
+          video.addEventListener('loadedmetadata', function() {
+            video.currentTime = 2; // Set to 2 seconds in
+          });
+          
+          // Handle play button click
+          playButton.addEventListener('click', function() {
+            if (video.paused) {
+              video.play();
+              playButton.style.display = 'none';
+            } else {
+              video.pause();
+              playButton.style.display = 'flex';
+            }
+          });
+          
+          // Handle video click to pause/play
+          video.addEventListener('click', function() {
+            if (video.paused) {
+              video.play();
+              playButton.style.display = 'none';
+            } else {
+              video.pause();
+              playButton.style.display = 'flex';
+            }
+          });
+          
+          // Handle video end
+          video.addEventListener('ended', function() {
+            playButton.style.display = 'flex';
+          });
+          
+          // Handle video pause (in case user pauses manually)
+          video.addEventListener('pause', function() {
+            playButton.style.display = 'flex';
+          });
+          
+          // Handle video play
+          video.addEventListener('play', function() {
+            playButton.style.display = 'none';
+          });
+        });
+      });
+    </script>
   </body>
 </html> 
