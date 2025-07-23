@@ -1,141 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Toolbox | MSP Tooling</title>
-    <!-- Tailwind CDN -->
+    <title>SupportStack | Smarter IT Support</title>
+    <!-- Tailwind CDN for quick layout utilities -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter font for modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+
+    <!-- Theme Styles -->
     <style>
-      html { font-family: 'Inter', sans-serif; }
-      
-      .video-container {
+      :root {
+        /* Light Theme (default) */
+        --bg: #F9FAFB;
+        --text-primary: #1F2937;
+        --text-secondary: #4B5563;
+        --border: #E5E7EB;
+        --blue: #2563EB;
+        --blue-hover: #1D4ED8;
+        --card-bg: #FFFFFF;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Dark theme overrides */
+      [data-theme="dark"] {
+        --bg: #0f172a;               /* gray-950 */
+        --text-primary: #e5e7eb;     /* gray-200 */
+        --text-secondary: #9ca3af;   /* gray-400 */
+        --border: #334155;           /* gray-700 */
+        --blue: #2563EB;             /* same primary blue */
+        --blue-hover: #1D4ED8;
+        --card-bg: #1e293b;          /* gray-800 */
+        --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Global usage */
+      html {
+        font-family: 'Inter', sans-serif;
+        font-size: 17px; /* slightly larger base size for readability */
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+      }
+      .text-secondary { color: var(--text-secondary); }
+      .btn-primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-primary:hover { background: var(--blue-hover); }
+      .btn-outline {
+        border: 1px solid var(--blue);
+        color: var(--blue);
+      }
+      .btn-outline:hover {
+        background: var(--blue-hover);
+        color: #fff;
+      }
+      .card {
+        background: var(--card-bg);
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border);
+      }
+      .divider { border-color: var(--border); }
+
+      /* Animated underline for hero tagline */
+      .underline-animate {
         position: relative;
-        display: inline-block;
-        cursor: pointer;
+        white-space: nowrap; /* keep on one line */
       }
-      
-      .play-button {
+      .underline-animate::after {
+        content: '';
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60px;
-        height: 60px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        z-index: 10;
+        left: 0;
+        bottom: -2px;
+        height: 2px;
+        width: 0;
+        background: var(--blue);
+        opacity: 0.6; /* slightly transparent underline */
+        animation: underlineGrow 0.8s ease forwards;
       }
-      
-      .play-button:hover {
-        background: rgba(255, 255, 255, 1);
-        transform: translate(-50%, -50%) scale(1.1);
-      }
-      
-      .play-button svg {
-        width: 20px;
-        height: 20px;
-        fill: #1f2937;
-        margin-left: 2px;
-      }
-      
-      .video-container video {
-        display: block;
-        width: 100%;
-        height: auto;
+      @keyframes underlineGrow {
+        to { width: 100%; }
       }
     </style>
-
   </head>
-  <body class="bg-gray-900 text-gray-200">
+  <body class="scroll-smooth">
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur border-b border-gray-800">
-      <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <div class="flex items-center gap-3">
-          <img src="logo-one.png" alt="Toolbox Logo" class="h-8 w-auto">
-          <div class="text-xl font-bold text-white tracking-tight">Toolbox</div>
-        </div>
-        <nav class="space-x-8 text-gray-300 font-medium">
-          <a href="#features" class="hover:text-white">Features</a>
-          <a href="#Impact" class="hover:text-white">Impact</a>
-          <a href="#contact" class="hover:text-white">Contact</a>
+    <header class="sticky top-0 z-50 backdrop-blur border-b divider">
+      <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        <a href="#hero" class="flex items-center gap-2 md:gap-3">
+          <img src="logo-one.png" alt="SupportStack Logo" class="h-8 w-auto"/>
+          <span class="text-lg md:text-xl font-semibold whitespace-nowrap">SupportStack</span>
+        </a>
+        <nav class="hidden md:flex space-x-10 font-medium text-secondary">
+          <a href="#suite" class="hover:text-[color:var(--text-primary)]">Features</a>
+          <a href="#why" class="hover:text-[color:var(--text-primary)]">How&nbsp;It&nbsp;Works</a>
+          <a href="#contact" class="hover:text-[color:var(--text-primary)]">Contact</a>
         </nav>
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="ml-4 px-4 py-2 rounded-md btn-outline text-sm whitespace-nowrap">🌙 Dark&nbsp;Mode</button>
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-16 pb-8 text-center">
-      <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4">MSP Tooling <span class="font-normal italic text-blue-400">by MSP Engineers</span></h1>
-      <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">Simple, practical toolbars that streamline support, reduce noise, and help your team move faster.</p>
-      <div class="flex justify-center gap-4">
-        <a href="#features" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">👉 Explore Features & Impact</a>
-        <a href="mailto:email@tylerstewart.co.za" class="border border-blue-500 text-blue-400 hover:bg-blue-800 hover:text-white font-semibold px-6 py-3 rounded-xl transition">👉 Let’s Talk Demo</a>
+    <!-- Hero -->
+    <section id="hero" class="relative overflow-hidden min-h-[calc(100vh-64px)] flex flex-col items-center justify-center text-center px-6">
+      <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-10" style="filter: grayscale(50%) blur(2px);"><source src="working with psa clean.mp4" type="video/mp4"/></video>
+      <div class="relative z-10 pt-9 max-w-xl mx-auto">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-5">The Taskbar Toolkit for<br>Faster, Smoother IT Support</h1>
+        <p class="text-lg md:text-xl font-medium text-secondary leading-relaxed mb-8">SupportStack is a suite of lightweight taskbar tools that reduce ticket noise, speed up resolutions, stop escalations.<br><span class="underline-animate">Take the pressure off your desk and your clients.</span></p>
+        <div class="flex justify-center gap-4 flex-col sm:flex-row">
+          <a href="#contact" class="px-8 py-4 rounded-xl shadow-lg btn-primary font-semibold flex items-center justify-center gap-2">⚡ Join the Early Access List</a>
+          <a href="#contact" class="px-8 py-4 rounded-xl btn-outline font-semibold flex items-center justify-center gap-2">🎥 See How It Works</a>
+        </div>
       </div>
     </section>
 
-    <!-- What We Build Section -->
-    <section id="features" class="py-20 bg-gray-900">
-      <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-center">What We Build</h2>
-        <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Toolbox is a suite of desktop toolbars built for MSPs. One lives on your help desk, the other with your clients. Both are designed to make support faster, clearer, and less interruptive.</p>
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- Support Panel Card -->
-          <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-2">Support Panel</h3>
-            <p class="text-gray-400 mb-4 font-semibold">Empower End Users. Lighten the Load.</p>
-            <p class="text-gray-300 mb-4">For most service desks, half the battle is getting users to log tickets properly. The other half? Managing updates, chasing emails, and handling constant "any update?" pings. It's a recipe for delays, frustration, and an overwhelmed IT team.</p>
-            <p class="text-gray-400 mb-4">Support Panel changes that. It's a simple, intuitive toolbar that lives right on the user's desktop and makes getting IT help seamless:</p>
-            <ul class="text-gray-300 space-y-2 text-base mb-4">
-              <li>✅ Log tickets instantly (with attachments + system info)</li>
-              <li>✅ Track ticket progress in real time</li>
-              <li>✅ Request callbacks or escalate urgent issues</li>
-              <li>✅ Request new hardware or use self-help guides</li>
-              <li>✅ All fully integrated with your existing systems—ConnectWise, Autotask, ServiceNow, and more</li>
-            </ul>
-            <p class="text-gray-400 mb-4">No new portals. No extra hassle. Just faster help, clearer communication, and a better experience for everyone.</p>
-            <div class="mt-6 flex-1 flex items-end justify-center">
-              <div class="w-full max-w-sm">
-                <div class="video-container shadow rounded-t-lg">
-                  <video src="Support-panel.mp4" class="w-full" preload="metadata"></video>
-                  <div class="play-button">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
+    <!-- What We’ve Built Section -->
+    <section id="suite" class="pt-16 pb-20">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-2xl font-bold mb-6 leading-snug">What We’ve Built for Smarter Support</h2>
+        <p class="text-base text-secondary leading-relaxed max-w-lg mx-auto mb-12">Meet users where work actually happens<br>Not in portals, inboxes, or phone queues.<br>Three lightweight apps, built for the real day-to-day of end users, site contacts, and frontline engineers.</p>
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="card rounded-xl overflow-hidden flex items-center justify-center relative video-container" style="aspect-ratio: 2/3; height: 550px;">
+            <video muted loop playsinline class="w-full h-full object-cover">
+              <source src="panel record.mp4" type="video/mp4"/>
+            </video>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 cursor-pointer">
+              <div class="play-button bg-white bg-opacity-90 rounded-full w-16 h-16 flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-gray-800 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
               </div>
             </div>
+          </div>
+          <div class="card rounded-xl overflow-hidden flex items-center justify-center relative video-container" style="aspect-ratio: 2/3; height: 550px;">
+            <video muted loop playsinline class="w-full h-full object-cover">
+              <source src="manage vid.mp4" type="video/mp4"/>
+            </video>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 cursor-pointer">
+              <div class="play-button bg-white bg-opacity-90 rounded-full w-16 h-16 flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-gray-800 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="card rounded-xl overflow-hidden flex items-center justify-center relative video-container" style="aspect-ratio: 2/3; height: 550px;">
+            <video muted loop playsinline class="w-full h-full object-cover">
+              <source src="contoso - Trim.mp4" type="video/mp4"/>
+            </video>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 cursor-pointer">
+              <div class="play-button bg-white bg-opacity-90 rounded-full w-16 h-16 flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-gray-800 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-10 md:gap-12">
+          <!-- Support Panel Card -->
+          <div class="card rounded-2xl p-8 flex flex-col items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="text-2xl mb-4">🖥️</div>
+            <h3 class="text-lg font-extrabold mb-2 text-center">Support Panel</h3>
+            <p class="text-secondary text-sm leading-relaxed text-center">Give staff a better way to log tickets and get help, right from the taskbar.<br/>One-click ticketing with system info, live progress tracking or escalation, and built-in self-service for common requests.</p>
+            <a href="#contact" class="text-[color:var(--blue)] hover:text-[color:var(--blue-hover)] font-medium text-sm mt-4 self-center">Want a walkthrough?</a>
+          </div>
+          <!-- Support Manage Card -->
+          <div class="card rounded-2xl p-8 flex flex-col items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="text-2xl mb-4">👥</div>
+            <h3 class="text-lg font-extrabold mb-2 text-center">Support Manage</h3>
+            <p class="text-secondary text-sm leading-relaxed text-center">Let ops and HR handle access changes without clogging your ticket queue.<br/>Add or update users without tickets, schedule terminations with audit trails, and sync everything with AD, M365, and your PSA.</p>
+            <a href="#contact" class="text-[color:var(--blue)] hover:text-[color:var(--blue-hover)] font-medium text-sm mt-4 self-center">Want a walkthrough?</a>
           </div>
           <!-- Support Guru Card -->
-          <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-2">Support Guru</h3>
-            <p class="text-gray-400 mb-4 font-semibold">Empower Engineers. Solve Tickets Faster.</p>
-            <p class="text-gray-300 mb-4">Every senior engineer has faced it: simple tickets land on their desk because the knowledge to fix them isn’t easily accessible to the frontline team. And when the choice is to walk someone through it (and risk still having to jump in) or just do it yourself—most seniors choose speed.</p>
-            <p class="text-gray-400 mb-4">Support Guru changes that. It's a lightweight system tray app that puts knowledge, troubleshooting, and ticket context right at your engineers' fingertips:</p>
-            <ul class="text-gray-300 space-y-2 text-base mb-4">
-              <li>🔍 Quick answers to "how do I..." questions (printers, drive mappings, common errors)</li>
-              <li>📚 Smart knowledge base search</li>
-              <li>📋 Ticket context and history</li>
-              <li>⚠️ One-click escalations and notifications</li>
-              <li>♻️ Recurring issue detection and insights</li>
-              <li>⚡ Integrated command lookup for Exchange, AD, networking, and more</li>
+          <div class="card rounded-2xl p-8 flex flex-col items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="text-2xl mb-4">🧠</div>
+            <h3 class="text-lg font-extrabold mb-2 text-center">Support Guru</h3>
+            <p class="text-secondary text-sm leading-relaxed text-center">Give frontline engineers the answers, tools, and context to solve more from the tray.<br/>Surface user and device context instantly, look up AD or Exchange commands, and generate clean, consistent ticket notes in one click.</p>
+            <a href="#contact" class="text-[color:var(--blue)] hover:text-[color:var(--blue-hover)] font-medium text-sm mt-4 self-center">Want a walkthrough?</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Highlights -->
+    <section id="highlights" class="py-20" style="background: var(--card-bg); border-top: 1px solid var(--border);">
+      <div class="max-w-5xl mx-auto space-y-24 px-6">
+        <!-- Support Panel Highlight -->
+        <div class="flex flex-col md:flex-row md:items-center gap-12">
+          <div class="flex-1 order-2 md:order-1">
+            <h3 class="text-xl font-bold mb-4 leading-snug">🖥️ Built for End Users, Connected to Your PSA</h3>
+            <p class="text-secondary text-base leading-relaxed">Support Panel lets staff log, track, and manage tickets right from the taskbar - no portals, no calls, no inboxes.</p>
+            <ul class="text-sm space-y-2 leading-normal mt-4">
+              <li>✅ <strong>Log tickets</strong> with screenshots and system info included</li>
+              <li>✅ <strong>Track progress, escalate, request a callback,</strong> or self-serve</li>
+              <li>✅ <strong>Fewer calls, cleaner tickets,</strong> and better visibility for your desk</li>
             </ul>
-            <p class="text-gray-400 mb-4">All without leaving their workflow.</p>
-            <div class="mt-6 flex-1 flex items-end justify-center">
-              <div class="w-full max-w-sm">
-                <div class="video-container shadow rounded-t-lg">
-                  <video src="support-guru.mp4" class="w-full" preload="metadata"></video>
-                  <div class="play-button">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
+            <p class="mt-4"><a href="#contact" class="text-[color:var(--blue)] hover:text-[color:var(--blue-hover)] font-medium text-sm">Want a walkthrough?</a></p>
+          </div>
+          <div class="flex-1 order-1 md:order-2">
+            <div class="card rounded-xl overflow-hidden relative video-container h-64">
+              <video muted loop playsinline class="w-full h-full object-cover">
+                <source src="working with psa clean.mp4" type="video/mp4"/>
+              </video>
+              <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 cursor-pointer">
+                <div class="play-button bg-white bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                  <svg class="w-4 h-4 text-gray-800 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Support Manage Highlight -->
+        <div class="flex flex-col md:flex-row md:items-center gap-12">
+          <div class="flex-1">
+            <div class="card rounded-xl overflow-hidden relative video-container h-64">
+              <video muted loop playsinline class="w-full h-full object-cover">
+                <source src="bwayne.mp4" type="video/mp4"/>
+              </video>
+              <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 cursor-pointer">
+                <div class="play-button bg-white bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                  <svg class="w-4 h-4 text-gray-800 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold mb-4 leading-snug">🔐 Fully Integrated with Microsoft 365</h3>
+            <p class="text-secondary text-base leading-relaxed">Support Manage connects directly to your Microsoft 365 tenant.<br/>It's built for secure, domain-joined environments - no logins, no portals.</p>
+            <ul class="text-sm space-y-2 leading-normal mt-4">
+              <li>✅ <strong>Automates 95%</strong> of joiner, leaver, and change requests</li>
+              <li>✅ <strong>Uses your real AD, Exchange, and M365</strong> structure</li>
+              <li>✅ <strong>Deployed via GPO,</strong> with no personal device access</li>
+            </ul>
+            <p class="mt-4"><a href="#contact" class="text-[color:var(--blue)] hover:text-[color:var(--blue-hover)] font-medium text-sm">Want a walkthrough?</a></p>
+          </div>
+        </div>
+        <!-- Support Guru Highlight -->
+        <div class="flex flex-col md:flex-row md:items-center gap-12">
+          <div class="flex-1 order-2 md:order-1">
+            <h3 class="text-xl font-bold mb-4 leading-snug">🧑‍💻 Built for Engineers, Right in the Tray</h3>
+            <p class="text-secondary text-base leading-relaxed">Support Guru gives frontline techs the tools and context to resolve more without switching tabs.</p>
+            <ul class="text-sm space-y-2 leading-normal mt-4">
+              <li>✅ <strong>See ticket history, system info, and context</strong> instantly</li>
+              <li>✅ <strong>Run quick lookups</strong> for AD, Exchange, and networking</li>
+              <li>✅ <strong>Resolve more without escalating</strong> or asking seniors</li>
+            </ul>
+            <p class="mt-4"><a href="#contact" class="text-[color:var(--blue)] hover:text-[color:var(--blue-hover)] font-medium text-sm">Want a walkthrough?</a></p>
+          </div>
+          <div class="flex-1 order-1 md:order-2">
+            <div class="card rounded-xl overflow-hidden relative video-container h-80">
+              <video muted loop playsinline class="w-full h-full object-cover">
+                <source src="contoso - Trim.mp4" type="video/mp4"/>
+              </video>
+              <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 cursor-pointer">
+                <div class="play-button bg-white bg-opacity-90 rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                  <svg class="w-4 h-4 text-gray-800 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -144,129 +274,83 @@
       </div>
     </section>
 
-    <!-- Value & Impact Section -->
-    <section id="Impact" class="py-20 bg-gray-900">
-      <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 text-center">How Toolbox Makes Life Easier for Your MSP</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- Support Panel Value Card -->
-          <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">Support Panel</h3>
-            <p class="text-gray-400 mb-4">Make IT Help Simple for Your Clients.</p>
-            <p class="text-gray-300 mb-4">Too many service desks get stuck handling avoidable calls and endless status updates. Support Panel changes that by giving users an easy, self-service way to get IT support—right from their desktop:</p>
-            <ul class="text-gray-300 space-y-2 text-base mb-4">
-              <li>🗋 One-Click Ticketing: Log tickets (with system info!) in seconds without confusion.</li>
-              <li>📢 Real-Time Updates: Users check progress or escalate without extra calls or emails.</li>
-              <li>🌟 Smooth Experience: Quick answers and clear communication keep clients happy.</li>
-            </ul>
-            <p class="text-gray-400 mb-4">Seamlessly integrates with your existing tools: ConnectWise, Autotask, ServiceNow, and more.</p>
+    <!-- Why It Matters -->
+    <section id="why" class="py-20">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <h2 class="text-2xl font-bold mb-6 leading-snug">Built for Less Friction, Fewer Escalations, and Smoother Support</h2>
+        <div class="grid md:grid-cols-3 gap-12">
+          <div class="flex flex-col items-center">
+            <div class="text-4xl mb-4">🧑‍💼</div>
+            <h4 class="text-base font-bold mb-2">Less Back-and-Forth</h4>
+            <p class="text-secondary text-sm leading-relaxed">Clients log clean tickets and see progress without chasing your team.</p>
           </div>
-          <!-- Support Guru Value Card -->
-          <div class="bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col">
-            <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">Support Guru</h3>
-            <p class="text-gray-400 mb-4">Help Your Techs Work Smarter, Not Harder.</p>
-            <p class="text-gray-300 mb-4">Your senior engineers shouldn’t have to step in for every basic ticket. Support Guru gives your frontline team instant access to knowledge and tools so they can:</p>
-            <ul class="text-gray-300 space-y-2 text-base mb-4">
-              <li>⚡ Fix More, Faster: Get step-by-step guides, commands, and next actions without leaving their workflow.</li>
-              <li>⚖️ Reduce Escalations: Tier 1–2 techs can handle more issues on their own.</li>
-              <li>🚀 Boost SLAs: Faster resolutions mean happier clients and stronger results.</li>
-            </ul>
-            <p class="text-gray-400 mb-4">All the right info, right when your team needs it.</p>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl mb-4">⚙️</div>
+            <h4 class="text-base font-bold mb-2">Fewer Tickets</h4>
+            <p class="text-secondary text-sm leading-relaxed">Engineers focus on real problems, not password resets and status checks.</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-4xl mb-4">📉</div>
+            <h4 class="text-base font-bold mb-2">Happier Clients & SLAs</h4>
+            <p class="text-secondary text-sm leading-relaxed">Lower noise means faster resolutions and tighter response times.</p>
           </div>
         </div>
-        <div class="grid md:grid-cols-3 gap-8 mt-10">
-            <div class="bg-gray-800 rounded-xl shadow-lg p-8 text-center">
-              <div class="text-3xl mb-3">📉</div>
-              <h4 class="text-lg font-semibold text-white mb-2">Cut Down Helpdesk Calls</h4>
-              <p class="text-gray-400">Keep clients informed and reduce unnecessary calls.</p>
-            </div>
-            <div class="bg-gray-800 rounded-xl shadow-lg p-8 text-center">
-              <div class="text-3xl mb-3">🔧</div>
-              <h4 class="text-lg font-semibold text-white mb-2">Fewer Internal Escalations</h4>
-              <p class="text-gray-400">Let junior techs resolve more tickets, keeping seniors focused where they’re needed most.</p>
-            </div>
-            <div class="bg-gray-800 rounded-xl shadow-lg p-8 text-center">
-              <div class="text-3xl mb-3">😊</div>
-              <h4 class="text-lg font-semibold text-white mb-2">Better Client Experience</h4>
-              <p class="text-gray-400">Quick responses, clearer updates, fewer frustrations.</p>
-            </div>
       </div>
     </section>
 
-
-    <!-- Call to Action Section -->
-    <section id="contact" class="py-20 bg-gray-900">
-      <div class="max-w-2xl mx-auto px-6 text-center">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Let’s Talk</h2>
-        <p class="text-gray-400 mb-8">Ready to take the pain out of IT support?</p>
-        <p class="text-gray-400 mb-8">Whether you want to see Toolbox in action or join our early access group, we’d love to connect. Let’s make your MSP’s workflow smoother, faster, and less stressful.</p>
-        <div class="flex flex-col md:flex-row justify-center gap-4">
-          <a href="mailto:email@tylerstewart.co.za" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">👉 Contact Us</a>
-          <a href="mailto:email@tylerstewart.co.za" class="border border-blue-500 text-blue-400 hover:bg-blue-800 hover:text-white font-semibold px-6 py-3 rounded-xl transition">👉 Schedule a Demo</a>
+    <!-- Call to Action -->
+    <section id="contact" class="py-20">
+      <div class="max-w-3xl mx-auto text-center px-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Ready to Try It with Your Team?</h2>
+        <p class="text-secondary mb-12">Let’s show you how it works — and how it saves your team time.</p>
+        <div class="flex justify-center gap-4 flex-col sm:flex-row mt-10 mb-16">
+          <a href="mailto:email@tylerstewart.co.za" class="px-8 py-4 rounded-xl shadow-lg btn-primary font-semibold flex items-center justify-center gap-2">⚡ Join Early Access</a>
+          <a href="mailto:email@tylerstewart.co.za" class="px-8 py-4 rounded-xl btn-outline font-semibold flex items-center justify-center gap-2">📞 Let’s Talk</a>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 bg-gray-900 border-t border-gray-800 text-center text-gray-500 text-sm">
-      <div class="mb-2">© 2024 Toolbox. MSP toolbars that actually help.</div>
-      <div class="space-x-4">
-        <a href="#" class="hover:text-white">Privacy Policy</a>
+    <footer class="py-10 border-t divider text-center text-secondary text-sm">
+      <div class="space-x-4 mb-2">
+        <a href="#" class="hover:text-[color:var(--text-primary)]">Privacy Policy</a>
         <span>|</span>
-        <a href="#" class="hover:text-white">Terms of Service</a>
+        <a href="#" class="hover:text-[color:var(--text-primary)]">Terms</a>
       </div>
+      <div>SupportStack: MSP toolbars that actually help.</div>
     </footer>
 
+    <!-- Theme Toggle Script -->
     <script>
-      // Video player functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        const videoContainers = document.querySelectorAll('.video-container');
+      const toggleBtn = document.getElementById('themeToggle');
+      function setMode(toDark) {
+        const body = document.body;
+        body.setAttribute('data-theme', toDark ? 'dark' : 'light');
+        toggleBtn.textContent = toDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+      }
+      toggleBtn.addEventListener('click', () => {
+        const isDark = document.body.getAttribute('data-theme') === 'dark';
+        setMode(!isDark);
+      });
+
+      // Video Play Overlay Script
+      document.querySelectorAll('.video-container').forEach(container => {
+        const video = container.querySelector('video');
+        const overlay = container.querySelector('.play-overlay');
         
-        videoContainers.forEach(container => {
-          const video = container.querySelector('video');
-          const playButton = container.querySelector('.play-button');
-          
-          // Set video to show a frame a couple seconds in
-          video.addEventListener('loadedmetadata', function() {
-            video.currentTime = 2; // Set to 2 seconds in
-          });
-          
-          // Handle play button click
-          playButton.addEventListener('click', function() {
-            if (video.paused) {
-              video.play();
-              playButton.style.display = 'none';
-            } else {
-              video.pause();
-              playButton.style.display = 'flex';
-            }
-          });
-          
-          // Handle video click to pause/play
-          video.addEventListener('click', function() {
-            if (video.paused) {
-              video.play();
-              playButton.style.display = 'none';
-            } else {
-              video.pause();
-              playButton.style.display = 'flex';
-            }
-          });
-          
-          // Handle video end
-          video.addEventListener('ended', function() {
-            playButton.style.display = 'flex';
-          });
-          
-          // Handle video pause (in case user pauses manually)
-          video.addEventListener('pause', function() {
-            playButton.style.display = 'flex';
-          });
-          
-          // Handle video play
-          video.addEventListener('play', function() {
-            playButton.style.display = 'none';
-          });
+        overlay.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+            overlay.style.display = 'none';
+          }
+        });
+        
+        video.addEventListener('pause', () => {
+          overlay.style.display = 'flex';
+        });
+        
+        video.addEventListener('ended', () => {
+          overlay.style.display = 'flex';
         });
       });
     </script>
